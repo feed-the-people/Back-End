@@ -21,7 +21,6 @@ module Queries
             city
             street
             zip
-            billingInfo
             createdAt
             updatedAt
             recipes {
