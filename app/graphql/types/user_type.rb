@@ -9,7 +9,6 @@ module Types
     field :city, String, null: false
     field :state, String, null: false
     field :zip, String, null: false
-    field :billing_info, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :recipes, [Types::RecipeType], null: false
