@@ -53,7 +53,7 @@ RSpec.describe 'UserRecipe Update' do
 
       post '/graphql', params: { query: query_string }
       results = JSON.parse(response.body, symbolize_names: true)
-      expect(results[:errors].first[:message]).to eq("Number must be greater than 0 and less than 5.")
+      expect(results[:errors].first[:message]).to eq("Rating must be between 0 and 5. Can be float.")
     end
 
     it 'cannot update if rating is higher than 5' do
@@ -70,7 +70,24 @@ RSpec.describe 'UserRecipe Update' do
 
       post '/graphql', params: { query: query_string }
       results = JSON.parse(response.body, symbolize_names: true)
-      expect(results[:errors].first[:message]).to eq("Number must be greater than 0 and less than 5.")
+      expect(results[:errors].first[:message]).to eq("Rating must be between 0 and 5. Can be float.")
+    end
+
+    it 'cannot update with non-existing id' do
+      query_string = <<-GRAPHQL
+        mutation {
+          updateRating(input: { params: { id: 9, recipeRating: 3.2 } }) {
+            userRecipe {
+              id
+              recipeRating
+            }
+          }
+        }
+      GRAPHQL
+
+      post '/graphql', params: { query: query_string }
+      results = JSON.parse(response.body, symbolize_names: true)
+      expect(results[:errors].first[:message]).to eq("No record of UserRecipe with ID 9")
     end
   end
 end
