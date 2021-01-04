@@ -9,7 +9,6 @@ FactoryBot.define do
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
     zip { Faker::Address.zip }
-    billing_info { Faker::Stripe.valid_card }
 
 		trait :with_recipes do  
     	after(:create) do |user|

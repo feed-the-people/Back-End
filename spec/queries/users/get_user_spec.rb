@@ -21,7 +21,6 @@ module Queries
             city
             street
             zip
-            billingInfo
             createdAt
             updatedAt
             recipes {
@@ -46,7 +45,6 @@ module Queries
       expect(json['data']['getUser']['city']).to eq(@user_1.city)
       expect(json['data']['getUser']['state']).to eq(@user_1.state)
       expect(json['data']['getUser']['zip']).to eq(@user_1.zip)
-      expect(json['data']['getUser']['billingInfo']).to eq(@user_1.billing_info)
       expect(json['data']['getUser']['recipes']).to eq([])
     end
 
@@ -64,7 +62,6 @@ module Queries
       expect(json['data']['getUser']['city']).to eq(@user_2.city)
       expect(json['data']['getUser']['state']).to eq(@user_2.state)
       expect(json['data']['getUser']['zip']).to eq(@user_2.zip)
-      expect(json['data']['getUser']['billingInfo']).to eq(@user_2.billing_info)
       expect(json['data']['getUser']['recipes'].size).to eq(3)
       expect(json['data']['getUser']['recipes']).to match_array(
         @user_2.recipes.map do |recipe|
