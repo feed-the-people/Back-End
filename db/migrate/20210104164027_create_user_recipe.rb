@@ -5,6 +5,7 @@ class CreateUserRecipe < ActiveRecord::Migration[6.0]
       t.references :recipe, null: false, foreign_key: true
       t.float :amount_donated
       t.float :recipe_rating
+      t.timestamps
     end
   end
 end
