@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
   describe 'relationships' do
+    it { should have_many :user_recipes }
     xit { should have_many :ingredients }
     it { should belong_to :user }
   end
