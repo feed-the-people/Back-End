@@ -6,11 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-FactoryBot.create :user
+UserRecipe.destroy_all
+Ingredient.destroy_all
+Recipe.destroy_all
+User.destroy_all
+
+FactoryBot.create_list(:user, 2)
 
 4.times do 
   FactoryBot.create(:recipe, user_id: 1)
 end
+
 i = 1
 4.times do
   3.times do 
@@ -18,5 +24,7 @@ i = 1
   end
   i += 1
 end
+
+User.last.user_recipes.create!(recipe: Recipe.first, amount_donated: 2.50)
 
 puts "Seeded and Ready to Roll!"

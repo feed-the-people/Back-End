@@ -6,7 +6,9 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter "app/controllers/graphql_controller.rb"
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
