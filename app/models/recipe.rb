@@ -3,10 +3,21 @@ class Recipe < ApplicationRecord
 
   has_many :user_recipes
   has_many :ingredients
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> bfb1c1d3bcd5ede1178390e10f8ee8c6d94f87da
   validates :title, presence: true
   validates :description, presence: true
   validates :instructions, presence: true
   # validates :charity_id, presence: true
+  # validates :charity_name, presence: true
 
+  def self.update_rating(id)
+    recipe = find(id)
+    ratings = recipe.user_recipes.pluck('recipe_rating')
+    recipe.avg_rating = (ratings.sum / ratings.length.to_f).round(1)
+    recipe.save
+  end
 end
