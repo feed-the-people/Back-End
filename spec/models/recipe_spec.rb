@@ -22,14 +22,14 @@ RSpec.describe Recipe, type: :model do
       expect(recipe.avg_rating).to eq(nil)
 
       buyer_1 = User.create!(username: 'Bill', password: '123')
-      buyer_1.user_recipes.create!(recipe: recipe, amount_donated: 2.35, recipe_rating: 4.5)
+      buyer_1.user_recipes.create!(recipe: recipe, amount_donated: 2.35, recipe_rating: 4)
       Recipe.update_rating(recipe.id)
-      expect(Recipe.find(recipe.id).avg_rating).to eq(4.5)
+      expect(Recipe.find(recipe.id).avg_rating).to eq(4.0)
 
       buyer_2 = User.create!(username: 'Ted', password: '123')
-      buyer_2.user_recipes.create!(recipe: recipe, amount_donated: 1.25, recipe_rating: 3.25)
+      buyer_2.user_recipes.create!(recipe: recipe, amount_donated: 1.25, recipe_rating: 3)
       Recipe.update_rating(recipe.id)
-      expect(Recipe.find(recipe.id).avg_rating).to eq(3.9)
+      expect(Recipe.find(recipe.id).avg_rating).to eq(3.5)
     end
   end
 end
