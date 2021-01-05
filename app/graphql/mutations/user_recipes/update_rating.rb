@@ -17,7 +17,7 @@ module Mutations
           if !valid_id?(rating_params[:id])
             GraphQL::ExecutionError.new("No record of UserRecipe with ID #{rating_params[:id]}")
           elsif !valid_rating?(rating_params[:recipe_rating])
-            GraphQL::ExecutionError.new("Rating must be between 0 and 5. Can be float.")
+            GraphQL::ExecutionError.new("Rating must be and integer between 0 and 5.")
           end
         end
       end

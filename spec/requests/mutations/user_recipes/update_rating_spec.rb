@@ -12,7 +12,7 @@ RSpec.describe 'UserRecipe Update' do
     it 'updates rating' do
       query_string = <<-GRAPHQL
         mutation {
-          updateRating(input: { params: { id: #{@recipe_id}, recipeRating: 3.2 } }) {
+          updateRating(input: { params: { id: #{@recipe_id}, recipeRating: 3 } }) {
             userRecipe {
               id
               recipeRating
@@ -34,7 +34,7 @@ RSpec.describe 'UserRecipe Update' do
       expect(results[:data][:updateRating][:userRecipe]).to have_key(:id)
       expect(results[:data][:updateRating][:userRecipe][:id]).to be_a(String)
       expect(results[:data][:updateRating][:userRecipe]).to have_key(:recipeRating)
-      expect(results[:data][:updateRating][:userRecipe][:recipeRating]).to be_a(Numeric)
+      expect(results[:data][:updateRating][:userRecipe][:recipeRating]).to be_a(Integer)
     end
   end
 
@@ -53,13 +53,13 @@ RSpec.describe 'UserRecipe Update' do
 
       post '/graphql', params: { query: query_string }
       results = JSON.parse(response.body, symbolize_names: true)
-      expect(results[:errors].first[:message]).to eq("Rating must be between 0 and 5. Can be float.")
+      expect(results[:errors].first[:message]).to eq("Rating must be and integer between 0 and 5.")
     end
 
     it 'cannot update if rating is higher than 5' do
       query_string = <<-GRAPHQL
         mutation {
-          updateRating(input: { params: { id: #{@recipe_id}, recipeRating: 5.1 } }) {
+          updateRating(input: { params: { id: #{@recipe_id}, recipeRating: 6 } }) {
             userRecipe {
               id
               recipeRating
@@ -70,13 +70,13 @@ RSpec.describe 'UserRecipe Update' do
 
       post '/graphql', params: { query: query_string }
       results = JSON.parse(response.body, symbolize_names: true)
-      expect(results[:errors].first[:message]).to eq("Rating must be between 0 and 5. Can be float.")
+      expect(results[:errors].first[:message]).to eq("Rating must be and integer between 0 and 5.")
     end
 
     it 'cannot update with non-existing id' do
       query_string = <<-GRAPHQL
         mutation {
-          updateRating(input: { params: { id: 9, recipeRating: 3.2 } }) {
+          updateRating(input: { params: { id: 9, recipeRating: 3 } }) {
             userRecipe {
               id
               recipeRating
