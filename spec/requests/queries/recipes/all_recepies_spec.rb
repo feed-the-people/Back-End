@@ -52,4 +52,20 @@ RSpec.describe 'allRecipes endpoint' do
       end
     end
   end
+
+  describe 'sad-path' do
+    it 'cannot query field that does not exist' do
+      query_string = <<-GRAPHQL
+        query {
+          allRecipes {
+            babaganoush
+        }
+      }
+      GRAPHQL
+
+      post '/graphql', params: { query: query_string }
+      results = JSON.parse(response.body, symbolize_names: true)
+      expect(results[:errors].first[:message]).to eq("Field 'babaganoush' doesn't exist on type 'Recipe'")
+    end
+  end
 end
