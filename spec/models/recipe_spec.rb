@@ -12,6 +12,7 @@ RSpec.describe Recipe, type: :model do
     it { should validate_presence_of :description }
     it { should validate_presence_of :instructions }
     xit { should validate_presence_of :charity_id }
+    xit { should validate_presence_of :charity_name }
   end
 
   describe 'class-methods' do
