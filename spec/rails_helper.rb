@@ -2,6 +2,7 @@
 require 'simplecov'
 SimpleCov.start do
   add_filter "app/controllers/graphql_controller.rb"
+  add_filter "/config/routes.rb"
 end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
