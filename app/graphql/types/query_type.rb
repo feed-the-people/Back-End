@@ -13,7 +13,11 @@ module Types
     end
 
     def bought_recipes_by_user(user_id:)
-      UserRecipe.where(user_id: user_id)
+      if User.exists?(user_id)
+        UserRecipe.where(user_id: user_id)
+      else
+        GraphQL::ExecutionError.new("No record of User with ID #{user_id}")
+      end
     end
   end
 end
