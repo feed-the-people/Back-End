@@ -30,3 +30,6 @@
 /config/application.yml
 coverage
 application.yml
+
+# Ignore useless file
+/.DS_Store
