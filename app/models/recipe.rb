@@ -8,6 +8,7 @@ class Recipe < ApplicationRecord
   validates :description, presence: true
   validates :instructions, presence: true
   # validates :charity_id, presence: true
+  # validates :charity_name, presence: true
 
   def self.update_rating(id)
     recipe = find(id)
