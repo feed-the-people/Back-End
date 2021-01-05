@@ -2,12 +2,12 @@ require 'rails_helper'
 
 module Mutations
   module Users
-    RSpec.describe CreateUser, type: :request do
+    RSpec.describe RegisterUser, type: :request do
       describe '.resolve' do
         it 'creates a user' do
 
           def perform(args = {})
-            Mutations::Users::CreateUser.new(object: nil, field: nil, context: {}).resolve(args)
+            Mutations::Users::RegisterUser.new(object: nil, field: nil, context: {}).resolve(args)
           end
 
           def query(id:)
