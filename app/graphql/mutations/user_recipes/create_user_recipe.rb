@@ -2,7 +2,7 @@ module Mutations
   module UserRecipes
     class CreateUserRecipe < Mutations::BaseMutation
       argument :params, Types::Input::UserRecipes::CreateInputType, required: true
-      # type Types::UserRecipeType
+
       field :user_recipe, Types::UserRecipeType, null: false
 
       def resolve(params:)

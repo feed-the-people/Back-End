@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
 
   has_many :user_recipes
   has_many :ingredients
-  
+
   validates :title, presence: true
   validates :description, presence: true
   validates :instructions, presence: true
