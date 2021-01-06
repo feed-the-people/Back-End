@@ -78,4 +78,76 @@ RSpec.describe 'recipeById endpoint' do
       end
     end
   end
+
+  describe 'sad-path' do
+    it 'record does not exist in database' do
+      query_string = <<-GRAPHQL
+        query {
+          recipeById(id: 9999999) {
+            id
+            title
+            description
+            instructions
+            image
+            userId
+            avgRating
+            charityId
+            charityName
+            updatedAt
+            createdAt
+            ingredients {
+              name
+              amount
+            }
+          }
+        }
+      GRAPHQL
+
+      post '/graphql', params: { query: query_string }
+      results = JSON.parse(response.body, symbolize_names: true)
+      expect(results[:errors].first[:message]).to eq("Recipe does not exist.")
+    end
+
+    it 'incorrect argument type' do
+      query_string = <<-GRAPHQL
+        query {
+          recipeById(id: 2.5) {
+            id
+            title
+            description
+            instructions
+            image
+            userId
+            avgRating
+            charityId
+            charityName
+            updatedAt
+            createdAt
+            ingredients {
+              name
+              amount
+            }
+          }
+        }
+      GRAPHQL
+
+      post '/graphql', params: { query: query_string }
+      results = JSON.parse(response.body, symbolize_names: true)
+      expect(results[:errors].first[:message]).to eq("Argument 'id' on Field 'recipeById' has an invalid value. Expected type 'ID!'.")
+    end
+
+    it 'requested field does not exist' do
+      query_string = <<-GRAPHQL
+        query {
+          recipeById(id: #{Recipe.first.id}) {
+            babaganoush
+          }
+        }
+      GRAPHQL
+
+      post '/graphql', params: { query: query_string }
+      results = JSON.parse(response.body, symbolize_names: true)
+      expect(results[:errors].first[:message]).to eq("Field 'babaganoush' doesn't exist on type 'Recipe'")
+    end
+  end
 end
