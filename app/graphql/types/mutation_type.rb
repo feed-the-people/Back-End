@@ -3,5 +3,6 @@ module Types
     field :register_user, mutation: Mutations::Users::RegisterUser
     field :create_user_recipe, mutation: Mutations::UserRecipes::CreateUserRecipe
     field :update_rating, mutation: Mutations::UserRecipes::UpdateRating
+    field :user_sign_in, mutation: Mutations::Users::UserSignIn
   end
 end
