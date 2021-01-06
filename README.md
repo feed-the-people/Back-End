@@ -5,7 +5,7 @@
   - [Endpoint](#endpoint)
   - [API calls](#api-calls)
     - [Users](#users)
-    - [Recipes](#recepies)
+    - [Recipes](#recipes)
     - [Ingredients](#ingredients)
     
     
