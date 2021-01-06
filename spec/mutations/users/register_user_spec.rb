@@ -4,67 +4,68 @@ module Mutations
   module Users
     RSpec.describe RegisterUser, type: :request do
       describe '.resolve' do
-        it 'creates a user' do
+        it 'creates a new user' do
+          @input = {
+                    image: "www.image.com",
+                    firstName: "Test",
+                    lastName: "User",
+                    state: "CO",
+                    city: "Denver",
+                    street: "1234 Road Street",
+                    zip: "1234",
+                    authProvider: {
+                      credentials: {
+                        username: "AnothaOne",
+                        password: "[omitted]"
+                      }
+                    }
+                  }
 
-          def perform(args = {})
-            Mutations::Users::RegisterUser.new(object: nil, field: nil, context: {}).resolve(args)
-          end
-
-          def query(id:)
+          def mutation
               <<~GQL
-                query {
-                  getUser(
-                    id: #{id}
-                  ) {
-                    id
-                    image
-                    username
-                    firstName
-                    lastName
-                    state
-                    city
-                    street
-                    zip
-                    createdAt
-                    updatedAt
-                    recipes {
-                        id
+              mutation {
+                registerUser( input: {
+                  image: "www.image.com",
+                  firstName: "Test",
+                  lastName: "User",
+                  state: "CO",
+                  city: "Denver",
+                  street: "1234 Road Street",
+                  zip: "1234",
+                  authProvider: {
+                    credentials: {
+                      username: "AnothaOne",
+                      password: "[omitted]"
                     }
                   }
                 }
-              GQL
-            end
-
-          @user = perform({
-            image: 'www.image.com',
-            first_name: 'Test',
-            last_name: 'User',
-            state: 'CO',
-            city: 'Denver',
-            street: '1234 Road Street',
-            zip: '1234',
-            auth_provider: {
-              credentials: {
-                username: 'email@example.com',
-                password: '[omitted]'
+              )
+              { user{
+                id
+                username
+                firstName
+                lastName
+                state
+                city
+                street
+                zip
+                image
+                    }
               }
             }
-          }
-          )
-          expect(@user.username).to eq('email@example.com')
-          expect(User.count).to eq(1)
-
-      post '/graphql', params: { query: query(id: @user.id) }
-
-      json = JSON.parse(response.body)
-      expect(json['data']['getUser']['id']).to eq(@user.id.to_s)
-      expect(json['data']['getUser']['username']).to eq(@user.username)
-      expect(json['data']['getUser']['firstName']).to eq(@user.first_name)
-      expect(json['data']['getUser']['lastName']).to eq(@user.last_name)
-      expect(json['data']['getUser']['state']).to eq(@user.state)
-      expect(json['data']['getUser']['city']).to eq(@user.city)
-      expect(json['data']['getUser']['zip']).to eq(@user.zip)
-      expect(json['data']['getUser']['image']).to eq(@user.image)
+              GQL
+          end
+          
+          post '/graphql', params: { query: mutation }
+          
+          user = JSON.parse(response.body)['data']['registerUser']['user']
+          expect(user['username']).to eq(@input[:authProvider][:credentials][:username])
+          expect(user['firstName']).to eq(@input[:firstName])
+          expect(user['lastName']).to eq(@input[:lastName])
+          expect(user['state']).to eq(@input[:state])
+          expect(user['city']).to eq(@input[:city])
+          expect(user['zip']).to eq(@input[:zip])
+          expect(user['image']).to eq(@input[:image])
         end
       end
     end
