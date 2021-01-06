@@ -5,6 +5,7 @@ module Mutations
       before :each do 
         @user = create(:user, :with_recipes)
         @recipe = @user.recipes.first
+        @buyer = create(:user)
       end
       def query(recipeId:, userId:, amountDonated:)
         <<~GQL
@@ -59,7 +60,7 @@ module Mutations
 
       describe 'happy paths' do
         it 'A user recipe can be created' do
-          post '/graphql', params: { query: query(recipeId: @recipe.id.to_s, userId: @user.id.to_s, amountDonated: "2.50") }
+          post '/graphql', params: { query: query(recipeId: @recipe.id.to_s, userId: @buyer.id.to_s, amountDonated: "2.50") }
 
           json = JSON.parse(response.body)
 
@@ -69,7 +70,7 @@ module Mutations
           expect(json['data']['createUserRecipe']['userRecipe']['recipeId']).to eq(@recipe.id.to_s)
 
           expect(json['data']['createUserRecipe']['userRecipe']['userId']).to be_a(String)
-          expect(json['data']['createUserRecipe']['userRecipe']['userId']).to eq(@user.id.to_s)
+          expect(json['data']['createUserRecipe']['userRecipe']['userId']).to eq(@buyer.id.to_s)
 
           expect(json['data']['createUserRecipe']['userRecipe']['amountDonated']).to be_a(Float)
           expect(json['data']['createUserRecipe']['userRecipe']['amountDonated']).to eq(2.50)
@@ -82,10 +83,10 @@ module Mutations
 
       describe 'sad paths' do
         it 'A user recipe cannot be created without amountDonated' do
-          post '/graphql', params: { query: sad_path_query(recipeId: @recipe.id.to_s, userId: @user.id.to_s, badParam: "3.50") }
+          post '/graphql', params: { query: sad_path_query(recipeId: @recipe.id.to_s, userId: @buyer.id.to_s, badParam: "3.50") }
 
           json = JSON.parse(response.body)
-
+        
           expect(json['errors'][0]['message']).to eq("Argument 'amountDonated' on InputObject 'CreateInput' is required. Expected type String!")
           
           expect(json['errors'][1]['message']).to eq("InputObject 'CreateInput' doesn't accept argument 'badParam'")
@@ -114,11 +115,21 @@ module Mutations
         end
 
         it 'A user recipe cannot be created with a rating' do
-          post '/graphql', params: { query: another_sad_query(recipeId: @recipe.id.to_s, userId: @user.id.to_s, amountDonated: "3.50", recipeRating: "3") }
+          post '/graphql', params: { query: another_sad_query(recipeId: @recipe.id.to_s, userId: @buyer.id.to_s, amountDonated: "3.50", recipeRating: "3") }
 
           json = JSON.parse(response.body)
 
           expect(json['errors'][0]['message']).to eq("InputObject 'CreateInput' doesn't accept argument 'recipeRating'")
+
+          expect(UserRecipe.all.size).to eq(0)
+        end
+        
+        it 'A user cannot buy their own recipe' do
+          post '/graphql', params: { query: query(recipeId: @recipe.id.to_s, userId: @user.id.to_s, amountDonated: "3.50") }
+
+          json = JSON.parse(response.body)
+
+          expect(json['errors'][0]['message']).to eq("A user cannot buy their own recipe")
 
           expect(UserRecipe.all.size).to eq(0)
         end
