@@ -11,14 +11,14 @@ RSpec.describe Recipe, type: :model do
     it { should validate_presence_of :title }
     it { should validate_presence_of :description }
     it { should validate_presence_of :instructions }
-    xit { should validate_presence_of :charity_id }
-    xit { should validate_presence_of :charity_name }
+    it { should validate_presence_of :charity_id }
+    it { should validate_presence_of :charity_name }
   end
 
   describe 'class-methods' do
     it 'can update average rating' do
       seller = User.create!(username: 'Bob', password: '123')
-      recipe = seller.recipes.create!(title: 'Pea Soup', description: 'Yum', instructions: '123')
+      recipe = FactoryBot.create(:recipe, user_id: seller.id)
 
       expect(recipe.avg_rating).to eq(nil)
 
