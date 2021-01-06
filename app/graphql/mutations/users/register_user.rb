@@ -15,10 +15,11 @@ module Mutations
 
       argument :auth_provider, AuthProviderSignupData, required: true
 
-      type Types::UserType
+      # type Types::UserType
+      field :user, Types::UserType, null: false
 
       def resolve(auth_provider: nil, first_name: nil, last_name: nil, street: nil, city: nil, state: nil, zip: nil, image: nil)
-        User.create!(
+        user = User.create!(
           username: auth_provider&.[](:credentials)&.[](:username),
           password: auth_provider&.[](:credentials)&.[](:password),
           first_name: first_name,
@@ -29,6 +30,7 @@ module Mutations
           zip: zip,
           image: image
                   )
+          {user: user}
       end
     end
   end
