@@ -6,6 +6,7 @@
   - [API calls](#api-calls)
     - [Users](#users)
       - [getUser](#getuser)
+      - [userSignIn](#usersignin)
     - [Recipes](#recipes)
     - [Ingredients](#ingredients)
     
@@ -53,7 +54,7 @@ query {
  ```
  
  Example response:
- ```json
+ ```yaml
  {
   "data": {
     "getUser": {
@@ -77,6 +78,65 @@ query {
           "avgRating": null
         }
       ]
+    }
+  }
+}
+ ```
+ 
+ #### userSignIn
+ 
+Authenticate the user whom already has an account. Returns user object with all user related data based on queryable fields.
+
+Arguments:
+- username - string
+- password - string
+
+Fields:
+- token*
+- user
+  - id
+  - username
+  - email
+  - firstName
+  - lastName
+  - street
+  - city
+  - state
+  - zip
+  - createdAt
+  - updatedAt
+  - recipes - displays only recipes created by the user
+
+** Note: Token may be needed for further authentication and highly recommend to query and store during user session
+
+    
+Example request:
+```graphql
+mutation {
+	userSignIn(input: { credentials: { username: "Triplicate Thirteen" password: "1234" }}) {
+    token
+    user {
+      id
+      image
+      username
+      email
+    }
+  }
+}
+ ```
+ 
+ Example response:
+ ```yaml
+{
+  "data": {
+    "userSignIn": {
+      "token": "dh9dmyyHYjQ0vLZbIjxredLARA==--CrBOAsYNwVV8n0xa--4vio0pppt+curOPLIXaZaA==",
+      "user": {
+        "id": "1",
+        "image": "https://robohash.org/my-own-slug.png?size=50x50&set=set1",
+        "username": "Triplicate Thirteen",
+        "email": "131313@aol.com"
+      }
     }
   }
 }
