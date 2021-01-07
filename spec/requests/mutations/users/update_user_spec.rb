@@ -28,7 +28,7 @@ RSpec.describe 'User Update' do
 
       post '/graphql', params: { query: query_string }
       results = JSON.parse(response.body, symbolize_names: true)
-      
+
       expect(results).to be_a(Hash)
       expect(results).to have_key(:data)
       expect(results[:data]).to be_a(Hash)
@@ -40,8 +40,10 @@ RSpec.describe 'User Update' do
       expect(results[:data][:updateUser][:user][:id]).to be_a(String)
       expect(results[:data][:updateUser][:user]).to have_key(:image)
       expect(results[:data][:updateUser][:user][:image]).to be_a(String)
+      expect(results[:data][:updateUser][:user][:image]).to_not eq("https://robohash.org/my-own-slug.png?size=50x50&set=set1")
       expect(results[:data][:updateUser][:user]).to have_key(:username)
       expect(results[:data][:updateUser][:user][:username]).to be_a(String)
+      expect(results[:data][:updateUser][:user][:username]).to_not eq("123user")
       expect(results[:data][:updateUser][:user]).to have_key(:firstName)
       expect(results[:data][:updateUser][:user][:firstName]).to be_a(String)
       expect(results[:data][:updateUser][:user]).to have_key(:lastName)
@@ -54,6 +56,7 @@ RSpec.describe 'User Update' do
       expect(results[:data][:updateUser][:user][:state]).to be_a(String)
       expect(results[:data][:updateUser][:user]).to have_key(:zip)
       expect(results[:data][:updateUser][:user][:zip]).to be_a(String)
+      expect(results[:data][:updateUser][:user][:zip]).to_not eq("90210")
     end
   end
 end
