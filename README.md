@@ -5,6 +5,7 @@
   - [Endpoint](#endpoint)
   - [API calls](#api-calls)
     - [Users](#users)
+      - [getUser](#getuser)
     - [Recipes](#recipes)
     - [Ingredients](#ingredients)
     
