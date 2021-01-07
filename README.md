@@ -17,8 +17,8 @@ API URL COMING SOON
 ## API Calls
 ### Users
 #### getUser
-Retreive a single user and all relevant information related to that user based on queried fields. Additional fields such as receipes for specific user is also available but not shown in example.
-   
+Retreive a single user and all relevant information related to that user based on queried fields.
+
 Arguments:
 - id - integer of user's id #
 
