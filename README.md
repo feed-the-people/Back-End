@@ -8,6 +8,7 @@
       - [getUser](#getuser)
       - [userSignIn](#usersignin)
     - [Recipes](#recipes)
+      - [createRecipe](#createrecipe)
     - [Ingredients](#ingredients)
     
     
@@ -141,5 +142,87 @@ mutation {
   }
 }
  ```
-  ### Recipes
+### Recipes
+#### createRecipe
+Creates and returns a single recipe object. 
+
+Arguments:
+- userId - integer of user's id #
+- title - string
+- description - string
+- instructions - string
+- charityId - integer
+- charityName - string
+- ingredients - array of objects/hashs (see example below)
+  - name - string
+  - amount - string
+- image - string (optional - not displayed in example)
+
+Fields:
+- recipe
+  - id
+  - image
+  - title
+  - description
+  - instructions
+  - charityId
+  - charityName
+  - avgRating
+  - userId
+  - createdAt
+  - updatedAt
+  - ingredients
+    - name
+    - amount
+
+Example request:
+```graphql
+mutation {
+  createRecipe(input: {params: {
+       userId: 1, 
+       title: "Chicken Parmesan", 
+       description: "A classic favorite!", 
+       instructions: "1. chicken 2.???? 3. profit", 
+       charityId: 533423, 
+       charityName: "Cookies for Kevin Fund", 
+       ingredients: [{name: "Chicken", amount: "2 lbs"}, {name: "Parmesan", amount: "5 gallons"}]}}) {
+    recipe {
+      id
+      title
+      description
+      instructions
+      ingredients {
+        name
+        amount
+      }
+    }
+  }
+}
+```
+
+Example response:
+```yaml
+{
+  "data": {
+    "createRecipe": {
+      "recipe": {
+        "id": "5",
+        "title": "Chicken Parmesan",
+        "description": "A classic favorite!",
+        "instructions": "1. chicken 2.???? 3. profit",
+        "ingredients": [
+          {
+            "name": "Chicken",
+            "amount": "2 lbs"
+          },
+          {
+            "name": "Parmesan",
+            "amount": "5 gallons"
+          }
+        ]
+      }
+    }
+  }
+}
+```
   ### Ingredients
