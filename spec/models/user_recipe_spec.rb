@@ -13,7 +13,7 @@ RSpec.describe UserRecipe, type: :model do
     end
 
     it 'should be able to create a user recipe' do
-      recipe = @seller.recipes.create!(title: 'Pea Soup', description: 'Yum', instructions: '123')
+      recipe = FactoryBot.create(:recipe, user_id: @seller.id)
       @buyer.user_recipes.create!(recipe: recipe, amount_donated: 1.25, recipe_rating: 4)
       expect(UserRecipe.count).to eq(1)
     end
@@ -24,7 +24,7 @@ RSpec.describe UserRecipe, type: :model do
     end
 
     it 'cannot create user recipe with missing user' do
-      recipe = @seller.recipes.create!(title: 'Pea Soup', description: 'Yum', instructions: '123')
+      recipe = FactoryBot.create(:recipe, user_id: @seller.id)
       expect{UserRecipe.create!(recipe: recipe, amount_donated: 1.25, recipe_rating: 4)}
         .to raise_error(ActiveRecord::RecordInvalid)
     end
