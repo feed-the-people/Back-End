@@ -18,7 +18,7 @@ module Mutations
       end
 
       def valid_user_id?(id)
-        User.find(id) rescue false
+        User.exists?(id) rescue false
       end
     end
   end
