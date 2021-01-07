@@ -13,7 +13,7 @@
     
 ## Endpoint
 
-API URL COMING SOON
+```POST https://feed-the-people-api.herokuapp.com/graphql```
 
 ## API Calls
 ### Users
