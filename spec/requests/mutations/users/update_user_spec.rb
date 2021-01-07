@@ -59,4 +59,33 @@ RSpec.describe 'User Update' do
       expect(results[:data][:updateUser][:user][:zip]).to_not eq("90210")
     end
   end
+
+  describe 'sad-paths' do
+    it 'cannot update a user with non-existing id' do
+      query_string = <<-GRAPHQL
+        mutation {
+          updateUser(input: { params: { id: 15, image: "https://robohash.org/new-slug-edit-update.png?size=50x50&set=set1", username: "food_love123", zip: "90272" } }) {
+            user {
+              id
+              image
+              username
+              firstName
+              lastName
+              street
+              city
+              state
+              zip
+            }
+          }
+        }
+      GRAPHQL
+
+      post '/graphql', params: { query: query_string }
+      results = JSON.parse(response.body, symbolize_names: true)
+      binding.pry
+      expect(results).to be_a(Hash)
+      expect(results).to have_key(:errors)
+      expect(results[:errors]).to be_a(Hash)
+    end
+  end
 end
