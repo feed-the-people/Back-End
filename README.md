@@ -36,7 +36,7 @@ Fields:
 - updatedAt
 - recipes* - displays only recipes created by the user
 
-* Note: when calling recipies as a field for user, you must also query a field for recipe. See recipes for all queryble fields.
+** Note: when calling recipies as a field for user, you must also query a field for recipe. See recipes for all queryble fields.
 
     
 Example request:
