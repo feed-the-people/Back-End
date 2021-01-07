@@ -10,7 +10,7 @@ RSpec.describe 'User Update' do
     it 'updates user attributes' do
       query_string = <<-GRAPHQL
         mutation {
-          updateUser(input: { params: { id: #{@user_id}, image: "https://robohash.org/new-slug-edit-update.png?size=50x50&set=set1", username: "food_love123", zip: "90272" } }) {
+          updateUser(input: { params: { id: #{@user_id}, image: "https://robohash.org/new-slug-edit-update.png?size=50x50&set=set1", username: "food_love123", firstName: "Chef", lastName: "Ratatouille", street: "234 Paris Ave", city: "New York", state: "NY", zip: "10025" } }) {
             user {
               id
               image
