@@ -12,7 +12,7 @@ module Mutations
           user.update!(user_params)
 
           { user: user }
-        elsif !valid_user_id?(user_params[:id])
+        else
           GraphQL::ExecutionError.new("No record of User with ID #{user_params[:id]}")
         end
       end
@@ -20,10 +20,6 @@ module Mutations
       def valid_user_id?(id)
         User.find(id) rescue false
       end
-
-      # def zip_error_message
-      #   GraphQL::ExecutionError.new("Zip should be formatted as 12345 or 12345-1234")
-      # end
     end
   end
 end
