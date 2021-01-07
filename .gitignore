@@ -33,3 +33,5 @@ application.yml
 
 # Ignore useless file
 /.DS_Store
+
+/app/assets/config/manifest.js
