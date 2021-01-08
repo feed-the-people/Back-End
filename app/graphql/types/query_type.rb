@@ -5,6 +5,10 @@ module Types
       argument :id, ID, required: true
     end
 
+    field :add_npo, resolver: Queries::AddNpo, null: false, description: 'Returns a collection of NPOs' do
+      argument :search_term, String, required: true
+    end
+
     def get_user(id:)
       User.find(id)
     end
