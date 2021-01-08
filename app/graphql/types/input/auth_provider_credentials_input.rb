@@ -7,4 +7,4 @@ module Types
       argument :password, String, required: true
     end
   end
-end
+end 
