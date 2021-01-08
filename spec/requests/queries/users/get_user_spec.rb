@@ -17,6 +17,7 @@ module Queries
             username
             firstName
             lastName
+            email
             state
             city
             street
@@ -41,6 +42,7 @@ module Queries
       expect(json['data']['getUser']['username']).to eq(@user_1.username)
       expect(json['data']['getUser']['firstName']).to eq(@user_1.first_name)
       expect(json['data']['getUser']['lastName']).to eq(@user_1.last_name)
+      expect(json['data']['getUser']['email']).to eq(@user_1.email)
       expect(json['data']['getUser']['street']).to eq(@user_1.street)
       expect(json['data']['getUser']['city']).to eq(@user_1.city)
       expect(json['data']['getUser']['state']).to eq(@user_1.state)
@@ -58,6 +60,7 @@ module Queries
       expect(json['data']['getUser']['username']).to eq(@user_2.username)
       expect(json['data']['getUser']['firstName']).to eq(@user_2.first_name)
       expect(json['data']['getUser']['lastName']).to eq(@user_2.last_name)
+      expect(json['data']['getUser']['email']).to eq(@user_2.email)
       expect(json['data']['getUser']['street']).to eq(@user_2.street)
       expect(json['data']['getUser']['city']).to eq(@user_2.city)
       expect(json['data']['getUser']['state']).to eq(@user_2.state)
