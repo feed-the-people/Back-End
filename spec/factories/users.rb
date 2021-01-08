@@ -9,11 +9,12 @@ FactoryBot.define do
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
     zip { Faker::Address.zip }
+    email { Faker::Internet.free_email }
 
-		trait :with_recipes do  
+		trait :with_recipes do
     	after(:create) do |user|
       create_list(:recipe, 3, user: user)
       end
-		end 
+		end
 	end
 end
