@@ -6,7 +6,7 @@ RSpec.describe 'Add NPO endpoint' do
     it 'gets all NPOs with the associated search team' do
       query_string = <<-GRAPHQL
         query {
-          addNpo( searchTerm: "Food Bank of the Rockies") {
+          getNpo( searchTerm: "Food Bank of the Rockies") {
               ein
               name
               city
@@ -16,7 +16,7 @@ RSpec.describe 'Add NPO endpoint' do
       GRAPHQL
 
       post '/graphql', params: { query: query_string }
-      results = JSON.parse(response.body, symbolize_names: true)[:data][:addNpo]
+      results = JSON.parse(response.body, symbolize_names: true)[:data][:getNpo]
       expect(results).to be_an(Array)
       expect(results.count).to eq(3)
 

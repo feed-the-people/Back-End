@@ -5,7 +5,7 @@ module Types
       argument :id, ID, required: true
     end
 
-    field :add_npo, resolver: Queries::AddNpo, null: false, description: 'Returns a collection of NPOs' do
+    field :get_npo, resolver: Queries::GetNpo, null: false, description: 'Returns a collection of NPOs' do
       argument :search_term, String, required: true
     end
 

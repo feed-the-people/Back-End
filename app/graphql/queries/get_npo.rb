@@ -1,5 +1,5 @@
 module Queries
-    class AddNpo < Queries::BaseQuery
+    class GetNpo < Queries::BaseQuery
       argument :search_term, required: true
       type [Types::NpoType], null: false
 
