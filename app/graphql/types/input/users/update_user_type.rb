@@ -7,6 +7,7 @@ module Types
         argument :username, String, required: false
         argument :first_name, String, required: false
         argument :last_name, String, required: false
+        argument :email, String, required: false
         argument :street, String, required: false
         argument :city, String, required: false
         argument :state, String, required: false

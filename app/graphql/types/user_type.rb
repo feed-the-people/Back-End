@@ -5,6 +5,7 @@ module Types
     field :username, String, null: false
     field :first_name, String, null: false
     field :last_name, String, null: false
+    field :email, String, null: false
     field :street, String, null: false
     field :city, String, null: false
     field :state, String, null: false
@@ -14,4 +15,3 @@ module Types
     field :recipes, [Types::RecipeType], null: false
   end
 end
-  
