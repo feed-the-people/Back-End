@@ -72,7 +72,7 @@ RSpec.describe 'User Update' do
       expect(results[:data][:updateUser][:user]).to have_key(:state)
       expect(results[:data][:updateUser][:user][:state]).to be_a(String)
       expect(results[:data][:updateUser][:user][:state]).to_not eq("CA")
-      
+
       expect(results[:data][:updateUser][:user]).to have_key(:zip)
       expect(results[:data][:updateUser][:user][:zip]).to be_a(String)
       expect(results[:data][:updateUser][:user][:zip]).to_not eq("90210")
@@ -90,6 +90,7 @@ RSpec.describe 'User Update' do
               username
               firstName
               lastName
+              email
               street
               city
               state
