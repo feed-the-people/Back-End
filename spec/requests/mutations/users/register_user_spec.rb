@@ -9,6 +9,7 @@ module Mutations
                     image: "www.image.com",
                     firstName: "Test",
                     lastName: "User",
+                    email: "test@email.com",
                     state: "CO",
                     city: "Denver",
                     street: "1234 Road Street",
@@ -22,46 +23,49 @@ module Mutations
                   }
 
           def mutation
-              <<~GQL
-              mutation {
-                registerUser( input: {
-                  image: "www.image.com",
-                  firstName: "Test",
-                  lastName: "User",
-                  state: "CO",
-                  city: "Denver",
-                  street: "1234 Road Street",
-                  zip: "1234",
-                  authProvider: {
-                    credentials: {
-                      username: "AnothaOne",
-                      password: "[omitted]"
-                    }
+            <<~GQL
+            mutation {
+              registerUser( input: {
+                image: "www.image.com",
+                firstName: "Test",
+                lastName: "User",
+                email: "test@email.com",
+                state: "CO",
+                city: "Denver",
+                street: "1234 Road Street",
+                zip: "1234",
+                authProvider: {
+                  credentials: {
+                    username: "AnothaOne",
+                    password: "[omitted]"
                   }
                 }
-              )
-              { user{
+              }
+            )
+            { user {
                 id
                 username
                 firstName
                 lastName
+                email
                 state
                 city
                 street
                 zip
                 image
-                    }
+                }
               }
             }
-              GQL
+            GQL
           end
-          
+
           post '/graphql', params: { query: mutation }
-          
+
           user = JSON.parse(response.body)['data']['registerUser']['user']
           expect(user['username']).to eq(@input[:authProvider][:credentials][:username])
           expect(user['firstName']).to eq(@input[:firstName])
           expect(user['lastName']).to eq(@input[:lastName])
+          expect(user['email']).to eq(@input[:email])
           expect(user['state']).to eq(@input[:state])
           expect(user['city']).to eq(@input[:city])
           expect(user['zip']).to eq(@input[:zip])
@@ -71,4 +75,3 @@ module Mutations
     end
   end
 end
-
