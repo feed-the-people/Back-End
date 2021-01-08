@@ -13,18 +13,22 @@ User.destroy_all
 
 FactoryBot.create_list(:user, 2)
 
-4.times do 
+4.times do
   FactoryBot.create(:recipe, user_id: 1)
 end
 
 i = 1
 4.times do
-  3.times do 
+  3.times do
     FactoryBot.create(:ingredient, recipe_id: i)
   end
   i += 1
 end
 
 User.last.user_recipes.create!(recipe: Recipe.first, amount_donated: 2.50)
+
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.reset_pk_sequence!(t)
+end
 
 puts "Seeded and Ready to Roll!"
