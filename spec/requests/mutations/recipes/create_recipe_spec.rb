@@ -14,7 +14,7 @@ RSpec.describe 'createRecipe endpoint' do
                   title: "Chicken Parmesan"
                   description: "A classic favorite!"
                   instructions: "1. chicken 2.???? 3. profit"
-                  charityId: 533423
+                  charityId: "533423"
                   charityName: "Cookies for Kevin Fund"
                   ingredients: [{name:"Chicken" amount: "2 lbs"}, {name:"Parmesan" amount: "5 lbs"}]
                   }
