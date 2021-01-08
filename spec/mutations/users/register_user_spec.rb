@@ -13,6 +13,7 @@ module Mutations
                     city: "Denver",
                     street: "1234 Road Street",
                     zip: "1234",
+                    email: "test_user@email.com",
                     authProvider: {
                       credentials: {
                         username: "AnothaOne",
@@ -32,6 +33,7 @@ module Mutations
                   city: "Denver",
                   street: "1234 Road Street",
                   zip: "1234",
+                  email: "test_user@email.com",
                   authProvider: {
                     credentials: {
                       username: "AnothaOne",
@@ -49,15 +51,16 @@ module Mutations
                 city
                 street
                 zip
+                email
                 image
-                    }
+                }
               }
             }
-              GQL
+            GQL
           end
-          
+
           post '/graphql', params: { query: mutation }
-          
+
           user = JSON.parse(response.body)['data']['registerUser']['user']
           expect(user['username']).to eq(@input[:authProvider][:credentials][:username])
           expect(user['firstName']).to eq(@input[:firstName])
@@ -65,10 +68,10 @@ module Mutations
           expect(user['state']).to eq(@input[:state])
           expect(user['city']).to eq(@input[:city])
           expect(user['zip']).to eq(@input[:zip])
+          expect(user['email']).to eq(@input[:email])
           expect(user['image']).to eq(@input[:image])
         end
       end
     end
   end
 end
-
