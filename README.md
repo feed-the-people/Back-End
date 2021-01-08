@@ -10,8 +10,8 @@
     - [Recipes](#recipes)
       - [createRecipe](#createrecipe)
     - [Ingredients](#ingredients)
-    
-    
+
+
 ## Endpoint
 
 ```POST https://feed-the-people-api.herokuapp.com/graphql```
@@ -19,7 +19,7 @@
 ## API Calls
 ### Users
 #### getUser
-Retreive a single user and all relevant information related to that user based on queried fields.
+Retrieve a single user and all relevant information related to that user based on queried fields.
 
 Arguments:
 - id - integer of user's id #
@@ -40,7 +40,7 @@ Fields:
 
 ** Note: when calling recipies as a field for user, you must also query a field for recipe. See recipes for all queryble fields.
 
-    
+
 Example request:
 ```graphql
 query {
@@ -53,7 +53,7 @@ query {
     }
 }
  ```
- 
+
  Example response:
  ```yaml
  {
@@ -83,9 +83,9 @@ query {
   }
 }
  ```
- 
+
  #### userSignIn
- 
+
 Authenticate the user whom already has an account. Returns user object with all user related data based on queryable fields.
 
 Arguments:
@@ -110,7 +110,7 @@ Fields:
 
 ** Note: Token may be needed for further authentication and highly recommend to query and store during user session
 
-    
+
 Example request:
 ```graphql
 mutation {
@@ -125,7 +125,7 @@ mutation {
   }
 }
  ```
- 
+
  Example response:
  ```yaml
 {
@@ -144,7 +144,7 @@ mutation {
  ```
 ### Recipes
 #### createRecipe
-Creates and returns a single recipe object. 
+Creates and returns a single recipe object.
 
 Arguments:
 - userId - integer of user's id #
@@ -179,12 +179,12 @@ Example request:
 ```graphql
 mutation {
   createRecipe(input: {params: {
-       userId: 1, 
-       title: "Chicken Parmesan", 
-       description: "A classic favorite!", 
-       instructions: "1. chicken 2.???? 3. profit", 
-       charityId: 533423, 
-       charityName: "Cookies for Kevin Fund", 
+       userId: 1,
+       title: "Chicken Parmesan",
+       description: "A classic favorite!",
+       instructions: "1. chicken 2.???? 3. profit",
+       charityId: 533423,
+       charityName: "Cookies for Kevin Fund",
        ingredients: [{name: "Chicken", amount: "2 lbs"}, {name: "Parmesan", amount: "5 gallons"}]}}) {
     recipe {
       id
