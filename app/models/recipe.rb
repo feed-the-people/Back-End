@@ -12,7 +12,7 @@ class Recipe < ApplicationRecord
 
   def self.update_rating(id)
     recipe = find(id)
-    ratings = recipe.user_recipes.pluck('recipe_rating')
+    ratings = recipe.user_recipes.where.not(recipe_rating: nil).pluck('recipe_rating')
     recipe.avg_rating = (ratings.sum / ratings.length.to_f).round(1)
     recipe.save
   end
