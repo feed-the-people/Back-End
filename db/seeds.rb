@@ -11,7 +11,20 @@ Ingredient.destroy_all
 Recipe.destroy_all
 User.destroy_all
 
-FactoryBot.create_list(:user, 5)
+FactoryBot.create_list(:user, 4)
+
+User.create!(
+  image: 'https://i.pravatar.cc/150?img=14',
+  username: 'mr_cook',
+  email: 'teddy_cooks@zmail.com',
+  password: '123',
+  first_name: 'Ted',
+  last_name: 'Mcpherson',
+  street: '123 Password St.',
+  city: 'Las Santos',
+  state: 'CA',
+  zip: '90210'
+)
 
 user2 = User.second
 user3 = User.third
