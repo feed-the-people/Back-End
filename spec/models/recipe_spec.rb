@@ -31,6 +31,11 @@ RSpec.describe Recipe, type: :model do
       buyer_2.user_recipes.create!(recipe: recipe, amount_donated: 1.25, recipe_rating: 3)
       Recipe.update_rating(recipe.id)
       expect(Recipe.find(recipe.id).avg_rating).to eq(3.5)
+
+      buyer_3 = User.create!(username: 'Mike', password: '123')
+      buyer_3.user_recipes.create!(recipe: recipe, amount_donated: 5.55)
+      Recipe.update_rating(recipe.id)
+      expect(Recipe.find(recipe.id).avg_rating).to eq(3.5)
     end
   end
 end

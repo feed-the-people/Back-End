@@ -76,7 +76,7 @@ RSpec.describe 'UserRecipe Update' do
     it 'cannot update with non-existing id' do
       query_string = <<-GRAPHQL
         mutation {
-          updateRating(input: { params: { id: 9, recipeRating: 3 } }) {
+          updateRating(input: { params: { id: 9999999, recipeRating: 3 } }) {
             userRecipe {
               id
               recipeRating
@@ -87,7 +87,7 @@ RSpec.describe 'UserRecipe Update' do
 
       post '/graphql', params: { query: query_string }
       results = JSON.parse(response.body, symbolize_names: true)
-      expect(results[:errors].first[:message]).to eq("No record of UserRecipe with ID 9")
+      expect(results[:errors].first[:message]).to eq("No record of UserRecipe with ID 9999999")
     end
   end
 end
