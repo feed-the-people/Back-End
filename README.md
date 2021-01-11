@@ -334,7 +334,7 @@ Arguments:
 - title - string
 - description - string
 - instructions - string
-- charityId - integer
+- charityId - string
 - charityName - string
 - ingredients - array of objects/hashs (see example below)
   - name - string
@@ -366,7 +366,7 @@ mutation {
        title: "Chicken Parmesan",
        description: "A classic favorite!",
        instructions: "1. chicken 2.???? 3. profit",
-       charityId: 533423,
+       charityId: "533423",
        charityName: "Cookies for Kevin Fund",
        ingredients: [{name: "Chicken", amount: "2 lbs"}, {name: "Parmesan", amount: "5 gallons"}]}}) {
     recipe {
