@@ -1,8 +1,9 @@
 module Types
   module Input
     module Recipes
-      class UpdateRecipeInputType < Types::BaseInputObject
+      class UpdateRecipeType < Types::BaseInputObject
         argument :id, Integer, required: true
+        argument :user_id, Integer, required: true
         argument :image, String, required: false
         argument :title, String, required: false
         argument :description, String, required: false
