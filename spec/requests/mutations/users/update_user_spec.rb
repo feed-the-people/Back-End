@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'User Update' do
   before :each do
-    @user = create(:user, image: "https://robohash.org/my-own-slug.png?size=50x50&set=set1", username: "123user", first_name: "Martha", last_name: "Stewart", email: "test@email.com", street: "123 Westside Ave", city: "Los Angeles", state: "CA", zip: "90210" )
+    @user = create(:user, image: "https://robohash.org/my-own-slug.png?size=50x50&set=set1", username: "123user", first_name: "Martha", last_name: "Stewart", email: "test@email.com", street: "123 Westside Ave", city: "Los Angeles", state: "CA", zip: "90210")
     @user_id = @user.id
   end
 
