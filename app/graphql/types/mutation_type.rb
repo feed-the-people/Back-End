@@ -8,5 +8,6 @@ module Types
     field :update_ingredient, mutation: Mutations::Ingredients::UpdateIngredient
     field :user_sign_in, mutation: Mutations::Users::UserSignIn
     field :create_recipe, mutation: Mutations::Recipes::CreateRecipe
+    field :update_recipe, mutation: Mutations::Recipes::UpdateRecipe
   end
 end
