@@ -4,6 +4,7 @@ module Types
       class RecipeInputType < Types::BaseInputObject
         argument :user_id, ID, required: true
         argument :title, String, required: true
+        argument :image, String, required: true
         argument :description, String, required: true
         argument :instructions, String, required: true
         argument :charity_id, String, required: true

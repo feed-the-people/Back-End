@@ -12,7 +12,7 @@
     - [Recipes](#recipes)
       - [createRecipe](#createrecipe)
       - [getNpo](#getnpo)
-      - [boughtRecipesByUser](#boughtrecipesbyuser) 
+      - [boughtRecipesByUser](#boughtrecipesbyuser)
       - [recipeById](#recipebyid)
       - [allRecipes](#allrecipes)
       - [updateRating](#updaterating)
@@ -98,7 +98,7 @@ Example response:
 {
   "data": {
     "registerUser": {
-      "user": { 
+      "user": {
         "id":"164",
         "username":"AnothaOne",
         "firstName":"Test",
@@ -239,8 +239,8 @@ Example response:
     }
   }
   ```
-  
-      
+
+
 #### updateUser
 Change user profile information.
 
@@ -272,20 +272,20 @@ Fields
 Example request:
 ```graphql
 mutation {
-  updateUser(input: { 
-    params: { 
+  updateUser(input: {
+    params: {
       id: 198,
-      image: "https://robohash.org/new-slug-edit-update.png?size=50x50&set=set1", 
-      username: "food_love123", 
-      firstName: "Chef", 
-      lastName: "Ratatouille", 
-      email: "bonappetit@email.com", 
-      street: "234 Paris Ave", 
-      city: "New York", 
-      state: "NY", 
-      zip: "10025" 
-            } 
-          }) 
+      image: "https://robohash.org/new-slug-edit-update.png?size=50x50&set=set1",
+      username: "food_love123",
+      firstName: "Chef",
+      lastName: "Ratatouille",
+      email: "bonappetit@email.com",
+      street: "234 Paris Ave",
+      city: "New York",
+      state: "NY",
+      zip: "10025"
+            }
+          })
     {
       user {
         id
@@ -332,6 +332,7 @@ Creates and returns a single recipe object.
 Arguments:
 - userId - integer of user's id #
 - title - string
+- image - string
 - description - string
 - instructions - string
 - charityId - string
@@ -364,6 +365,7 @@ mutation {
   createRecipe(input: {params: {
        userId: 1,
        title: "Chicken Parmesan",
+       image: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/7/11/0/FNK_the-best-chicken-parmesan_H_s4x3.jpg.rend.hgtvcom.826.620.suffix/1562853897238.jpeg",
        description: "A classic favorite!",
        instructions: "1. chicken 2.???? 3. profit",
        charityId: "533423",
@@ -391,6 +393,7 @@ Example response:
       "recipe": {
         "id": "5",
         "title": "Chicken Parmesan",
+        "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/7/11/0/FNK_the-best-chicken-parmesan_H_s4x3.jpg.rend.hgtvcom.826.620.suffix/1562853897238.jpeg",
         "description": "A classic favorite!",
         "instructions": "1. chicken 2.???? 3. profit",
         "ingredients": [
@@ -474,7 +477,7 @@ Fields:
 Example request:
 ```graphql
     query {
-          boughtRecipesByUser( userId: 246 ) { 
+          boughtRecipesByUser( userId: 246 ) {
             id
             userId
             recipeId
@@ -734,9 +737,9 @@ Example response:
       mutation {
                 createIngredient( input: { params: {
                   recipeId: 9
-                  name: "Oats" 
-                  amount: "1 tsp" 
-                  }}) 
+                  name: "Oats"
+                  amount: "1 tsp"
+                  }})
                   {
                   ingredient {
                       name
@@ -775,10 +778,10 @@ Fields:
 Example request:
 ```graphql
     mutation {
-            updateIngredient( input: { params: { 
-              id: #{@ingredient.id.to_s} 
-              name: "changed ingredient" 
-              amount: "100 Cups" }}) 
+            updateIngredient( input: { params: {
+              id: #{@ingredient.id.to_s}
+              name: "changed ingredient"
+              amount: "100 Cups" }})
               {
               ingredient {
                 id
