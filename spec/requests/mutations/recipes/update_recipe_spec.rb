@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Update Recipe' do
   before :each do
     @user = create(:user)
-    @recipe = create(:recipe, user_id: @user.id, title: "Chicken Parmesan", description: "A classic favorite!", instructions: "1. chicken 2.???? 3. profit", charity_id: 533423, charity_name: "Boys & Girls Club", ingredients: [{ name: "Chicken" amount: "2 lbs" }, { name: "Parmesan" amount: "5 lbs" }])
+    @recipe = create(:recipe, user_id: @user.id, title: "Chicken Parmesan", description: "A classic favorite!", instructions: "1. chicken 2.???? 3. profit", charity_id: "533423", charity_name: "Boys & Girls Club")
   end
 
   describe 'happy-paths' do
@@ -33,7 +33,7 @@ RSpec.describe 'Update Recipe' do
 
       post '/graphql', params: { query: mutation_string }
       results = JSON.parse(response.body, symbolize_names: true)
-
+      binding.pry
       expect(results).to be_a(Hash)
       expect(results).to have_key(:data)
       expect(results[:data]).to be_a(Hash)
@@ -42,3 +42,4 @@ RSpec.describe 'Update Recipe' do
       expect(results[:data][:updateRecipe]).to have_key(:recipe)
     end
   end
+end
