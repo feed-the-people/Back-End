@@ -15,6 +15,7 @@ module Mutations
         recipe = Recipe.create(
           user_id: params.user_id.to_i,
           title: params.title,
+          image: params.image,
           description: params.description,
           instructions: params.instructions,
           charity_id: params.charity_id.to_i,

@@ -7,35 +7,42 @@ RSpec.describe 'createRecipe endpoint' do
 
   describe 'happy-path' do
     it 'returns a recipe with all needed args' do
-      query_string = <<-GRAPHQL
-      mutation {
-                createRecipe( input: { params: {
-                  userId: #{User.first.id}
-                  title: "Chicken Parmesan"
-                  description: "A classic favorite!"
-                  instructions: "1. chicken 2.???? 3. profit"
-                  charityId: "533423"
-                  charityName: "Cookies for Kevin Fund"
-                  ingredients: [{name:"Chicken" amount: "2 lbs"}, {name:"Parmesan" amount: "5 lbs"}]
-                  }
-                }) {
-                  recipe {
-                      id
-                      title
-                      description
-                      instructions
-                      ingredients {
-                        name
-                        amount
-                      }
-                    }
-                  }
-                }
+      params = <<-GRAPHQL
+          {
+    	"params": { "params": {
+         "userId": #{User.first.id},
+         "title": "Chicken Parmesan",
+         "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/7/11/0/FNK_the-best-chicken-parmesan_H_s4x3.jpg.rend.hgtvcom.826.620.suffix/1562853897238.jpeg",
+         "description": "A classic favorite!",
+         "instructions": "1. chicken 2.???? 3. profit",
+         "charityId": "533423",
+         "charityName": "Cookies for Kevin Fund",
+         "ingredients": [{"name": "Chicken", "amount": "2 lbs"},{"name": "Parmesan", "amount": "5 gallons"}]
+      }}
+
+    }
       GRAPHQL
 
-      post '/graphql', params: { query: query_string }
-      results = JSON.parse(response.body, symbolize_names: true)
+      query_string = <<-GRAPHQL
+        mutation($params: CreateRecipeInput!) {
+          createRecipe(input: $params) {
+            recipe {
+              id
+              title
+              description
+              instructions
+              ingredients {
+                name
+                amount
+              }
+            }
+          }
+        }
+      GRAPHQL
 
+      post '/graphql', params: { query: query_string, variables: params}
+
+      results = JSON.parse(response.body, symbolize_names: true)
       expect(results).to be_a(Hash)
       expect(results).to have_key(:data)
       expect(results[:data]).to be_a(Hash)
