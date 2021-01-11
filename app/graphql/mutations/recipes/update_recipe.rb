@@ -10,7 +10,6 @@ module Mutations
         if valid_recipe_id?(recipe_params[:id])
           recipe = Recipe.find(recipe_params[:id])
           recipe.update(recipe_params)
-          # recipe.ingredients.update(recipe_params.to_h[:ingredients])
 
           { recipe: recipe }
         else
