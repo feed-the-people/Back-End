@@ -4,6 +4,7 @@ module Queries
     before :each do
       @user_1 = create(:user)
       @user_2 = create(:user, :with_recipes)
+      @user_1.user_recipes.create(recipe: @user_2.recipes.first, amount_donated: 2.50)
     end
 
     def query(id:)
@@ -27,6 +28,13 @@ module Queries
             recipes {
                 id
             }
+            userRecipes{
+              id
+              recipe{
+                id
+                title
+              }
+            }
           }
         }
       GQL
@@ -48,6 +56,8 @@ module Queries
       expect(json['data']['getUser']['state']).to eq(@user_1.state)
       expect(json['data']['getUser']['zip']).to eq(@user_1.zip)
       expect(json['data']['getUser']['recipes']).to eq([])
+      expect(json['data']['getUser']['userRecipes']).to be_an(Array)
+      expect(json['data']['getUser']['userRecipes'][0]['recipe']['title']).to eq(@user_2.recipes.first.title)
     end
 
     it 'can get a single user with some recipes' do

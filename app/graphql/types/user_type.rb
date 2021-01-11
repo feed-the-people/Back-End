@@ -13,5 +13,6 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :recipes, [Types::RecipeType], null: false
+    field :user_recipes, [Types::UserRecipeType], null: false
   end
 end
