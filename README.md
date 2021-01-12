@@ -12,7 +12,6 @@
     - [Recipes](#recipes)
       - [createRecipe](#createrecipe)
       - [getNpo](#getnpo)
-      - [boughtRecipesByUser](#boughtrecipesbyuser)
       - [recipeById](#recipebyid)
       - [allRecipes](#allrecipes)
       - [updateRating](#updaterating)
@@ -134,6 +133,7 @@ Example response:
   - createdAt
   - updatedAt
   - recipes* - displays only recipes created by the user
+  - userRecipes - displays a join table for a user's purchased recipes
 
   ** Note: when calling recipies as a field for user, you must also query a field for recipe. See recipes for all queryble fields.
 
@@ -146,8 +146,16 @@ Example response:
       email
       recipes {
         title
-        avg_rating
+        avgRating
       }
+      userRecipes {
+        amountDonated
+        recipes {
+          title
+          avgRating
+        }
+      }
+    }
   }
   ```
 
@@ -449,98 +457,6 @@ Example response:
               }
           }
 }  
-```
-#### boughtRecipesByUser
-Returns all recipes which have been purchased by the logged in user.
-
-Arguments:
-- userId
-
-Fields:
-- id
-- userId
-- recipeId
-- recipe
-  - id
-  - image
-  - title
-  - description
-  - instructions
-  - charityId
-  - userId
-  - avgRating
-  - ingredients
-    - id
-    - name
-    - amount
-
-Example request:
-```graphql
-    query {
-          boughtRecipesByUser( userId: 246 ) {
-            id
-            userId
-            recipeId
-            recipe {
-              id
-              image
-              title
-              description
-              instructions
-              charityId
-              userId
-              avgRating
-              ingredients {
-                id
-                name
-                amount
-              }
-            }
-          }
-        }
-```
-Example response:
-```yaml
-{
-  "data": {
-    "boughtRecipesByUser": [
-      {"id":"53",
-      "userId":"246",
-      "recipeId":"255",
-      "recipe": {
-        "id":"255",
-        "image":"https://loremflickr.com/50/60/food",
-        "title":"Cheeseburger",
-        "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
-        "instructions":"Laudantium reiciendis cupiditate. Pariatur qui soluta. Sed nobis voluptatem. Maiores commodi quos.",
-        "charityId":"1",
-        "userId":"245",
-        "avgRating":nil,
-        "ingredients":[
-          {"id":"77", "name":"Pistachio Nut", "amount":"1 teaspoon"}
-          ]
-        }
-      },
-     {"id":"54",
-      "userId":"246",
-      "recipeId":"257",
-      "recipe": {
-        "id":"257",
-        "image":"https://loremflickr.com/50/60/food",
-        "title":"Poke",
-        "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
-        "instructions": "Rerum ullam autem. Id omnis vero. Voluptatem dolor quos. Aspernatur libero quo. Inventore totam nihil.",
-        "charityId":"1",
-        "userId":"245",
-        "avgRating":nil,
-        "ingredients":[
-          {"id":"78", "name":"Peanuts", "amount":"3 gallon"}
-          ]
-        }
-      }
-    ]
-  }
-}
 ```
 
 #### recipeById
