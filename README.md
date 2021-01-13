@@ -1,5 +1,5 @@
 # Feed the People API
-https://travis-ci.com/feed-the-people/Back-End.svg?branch=main
+![Travis-ci](https://travis-ci.com/feed-the-people/Back-End.svg?branch=main)
 
 ## Summary
   - [Prerequisites](#prerequisites)
