@@ -2,6 +2,7 @@
 
 
 ## Summary
+  - [Setup](#setup)
   - [Endpoint](#endpoint)
   - [API calls](#api-calls)
     - [Users](#users)
@@ -20,6 +21,9 @@
       - [updateIngredient](#updateingredient)
     - [UserRecipes](#userrecipes)
       - [createUserRecipe](#createuserrecipe)
+      
+## Setup
+
 ## Endpoint
 
 ```POST https://feed-the-people-api.herokuapp.com/graphql```
