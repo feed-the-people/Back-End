@@ -4,7 +4,7 @@
 ## Summary
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
-    - [Running Tests](#running tests)
+    - [Testing](#testing)
   - [Endpoint](#endpoint)
   - [API calls](#api-calls)
     - [Users](#users)
@@ -34,7 +34,7 @@
   - Run `rails db:migrate`
   - Run `rails db:seed`
   
-  ### Running Tests
+  ### Testing
     - `bundle exec rspec`
     - All tests should be passing
 
