@@ -2,7 +2,9 @@
 
 
 ## Summary
+  - [Prerequisites](#prerequisites)
   - [Setup](#setup)
+    - [Running Tests](#running tests)
   - [Endpoint](#endpoint)
   - [API calls](#api-calls)
     - [Users](#users)
@@ -21,8 +23,20 @@
       - [updateIngredient](#updateingredient)
     - [UserRecipes](#userrecipes)
       - [createUserRecipe](#createuserrecipe)
-      
+
+## Prerequisites
+  - Rails 6.0.3.4
+  - Ruby 2.5.3
+  
 ## Setup
+  - Run `bundle install`
+  - Run `rails db:create`
+  - Run `rails db:migrate`
+  - Run `rails db:seed`
+  
+  ### Running Tests
+    - `bundle exec rspec`
+    - All tests should be passing
 
 ## Endpoint
 
