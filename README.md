@@ -14,6 +14,7 @@
       - [updateUser](#updateuser)
     - [Recipes](#recipes)
       - [createRecipe](#createrecipe)
+      - [updateRecipe](#updaterecipe)
       - [getNpo](#getnpo)
       - [recipeById](#recipebyid)
       - [allRecipes](#allrecipes)
@@ -430,6 +431,92 @@ Example response:
           {
             "name": "Parmesan",
             "amount": "5 gallons"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### updateRecipe
+Changes recipe information.
+
+Arguments:
+- id - integer of recipe's id # (required)
+- userId - integer of user id #
+- title - string
+- image - string
+- description - string
+- instructions - string
+- charityId - string
+- charityName - string
+- ingredients - array of objects/hashs (see example below)
+  - name - string
+  - amount - string
+
+Fields:
+- recipe
+  - id
+  - image
+  - title
+  - description
+  - instructions
+  - charityId
+  - charityName
+  - avgRating
+  - userId
+  - createdAt
+  - updatedAt
+  - ingredients
+    - name
+    - amount
+    
+Example request:
+```graphql
+    mutation {
+      updateRecipe(input: {params: {
+        id: 1,
+        title: "ABC",
+        description: "A combination of random test ingredients to make something that's maybe edible?",
+        instructions: "1. Something 2. Something Else 3. Something Delicious!"
+      }}) {
+        recipe {
+          id
+          title
+          description
+          instructions
+          ingredients {
+            name
+            amount
+          }
+        }
+      } 
+    }
+```
+
+Example response:
+```yaml
+{
+  "data": {
+    "updateRecipe": {
+      "recipe": {
+        "id": "1",
+        "title": "ABC",
+        "description": "A combination of random test ingredients to make something that's maybe edible?",
+        "instructions": "1. Something 2. Something Else 3. Something Delicious!",
+        "ingredients": [
+          {
+            "name": "Poblano Pepper",
+            "amount": "2 cups"
+          },
+          {
+            "name": "Green Pepper",
+            "amount": "2 cups"
+          },
+          {
+            "name": "Peas",
+            "amount": "1/3 quart"
           }
         ]
       }
