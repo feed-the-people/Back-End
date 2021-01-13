@@ -440,7 +440,7 @@ Example response:
 ```
 
 #### updateRecipe
-Changes recipe information.
+Edits and changes recipe information when a valid recipe id is provided.
 
 Arguments:
 - id - integer of recipe's id # (required)
