@@ -6,10 +6,10 @@ module Types
         argument :title, String, required: true
         argument :image, String, required: true
         argument :description, String, required: true
-        argument :instructions, String, required: true
         argument :charity_id, String, required: true
         argument :charity_name, String, required: true
         argument :ingredients, [Types::Input::Recipes::RecipeIngredientType], required: true
+        argument :instructions, [Types::Input::Recipes::RecipeInstructionType], required: true
       end
     end
   end
