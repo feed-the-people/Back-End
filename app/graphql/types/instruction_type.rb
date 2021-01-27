@@ -1,5 +1,5 @@
 module Types
-  class IngredientType < Types::BaseObject
+  class InstructionType < Types::BaseObject
     field :id, ID, null: false
     field :recipe_id, ID, null: false
     field :description, String, null: false

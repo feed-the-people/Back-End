@@ -8,6 +8,7 @@ module Mutations
       def resolve(params:)
         recipe = create_recipe(params)
         recipe.ingredients.create(params.to_h[:ingredients])
+        recipe.instructions.create(params.to_h[:instructions])
         { recipe: recipe }
       end
 
@@ -17,7 +18,7 @@ module Mutations
           title: params.title,
           image: params.image,
           description: params.description,
-          instructions: params.instructions,
+          # instructions: params.instructions,
           charity_id: params.charity_id.to_i,
           charity_name: params.charity_name)
 

@@ -15,7 +15,6 @@ RSpec.describe 'allRecipes endpoint' do
             id
             title
             description
-            instructions
             image
             avgRating
             userId
@@ -42,7 +41,6 @@ RSpec.describe 'allRecipes endpoint' do
         expect(recipe).to have_key(:id)
         expect(recipe).to have_key(:title)
         expect(recipe).to have_key(:description)
-        expect(recipe).to have_key(:instructions)
         expect(recipe).to have_key(:image)
         expect(recipe).to have_key(:avgRating)
         expect(recipe).to have_key(:userId)

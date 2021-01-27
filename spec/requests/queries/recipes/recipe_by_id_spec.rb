@@ -15,7 +15,9 @@ RSpec.describe 'recipeById endpoint' do
             id
             title
             description
-            instructions
+            instructions {
+              description
+            }
             image
             userId
             avgRating
@@ -49,7 +51,7 @@ RSpec.describe 'recipeById endpoint' do
       expect(recipe).to have_key(:description)
       expect(recipe[:description]).to be_a(String)
       expect(recipe).to have_key(:instructions)
-      expect(recipe[:instructions]).to be_a(String)
+      expect(recipe[:instructions]).to be_an(Array)
       expect(recipe).to have_key(:image)
       expect(recipe[:image]).to be_a(String)
       expect(recipe).to have_key(:userId)
@@ -87,7 +89,9 @@ RSpec.describe 'recipeById endpoint' do
             id
             title
             description
-            instructions
+            instructions {
+              description
+            }
             image
             userId
             avgRating
@@ -115,7 +119,9 @@ RSpec.describe 'recipeById endpoint' do
             id
             title
             description
-            instructions
+            instructions {
+              description
+            }
             image
             userId
             avgRating

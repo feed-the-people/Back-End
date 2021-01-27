@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Update Recipe' do
   before :each do
     @user = create(:user)
-    @recipe = create(:recipe, user_id: @user.id, image: "https://loremflickr.com/50/60/food", title: "Chicken Parmesan", description: "A classic favorite!", instructions: "1. chicken 2.???? 3. profit", charity_id: "533423", charity_name: "Boys & Girls Club")
+    @recipe = create(:recipe, user_id: @user.id, image: "https://loremflickr.com/50/60/food", title: "Chicken Parmesan", description: "A classic favorite!", charity_id: "533423", charity_name: "Boys & Girls Club")
   end
 
   describe 'happy-paths' do
@@ -13,15 +13,16 @@ RSpec.describe 'Update Recipe' do
         updateRecipe(input: {params: {
           id: #{@recipe.id},
           title: "Food Experiment",
-          description: "A combination of random test ingredients to make something that's maybe edible?",
-          instructions: "1. Something 2. Something Else 3. Something Delicious!"
+          description: "A combination of random test ingredients to make something that's maybe edible?"
         }}) {
           recipe {
             id
             image
             title
             description
-            instructions
+            instructions {
+              description
+            }
             ingredients {
               name
               amount
@@ -57,8 +58,7 @@ RSpec.describe 'Update Recipe' do
       expect(results[:data][:updateRecipe][:recipe][:description]).to_not eq("A classic favorite!")
 
       expect(results[:data][:updateRecipe][:recipe]).to have_key(:instructions)
-      expect(results[:data][:updateRecipe][:recipe][:instructions]).to be_a(String)
-      expect(results[:data][:updateRecipe][:recipe][:instructions]).to_not eq("1. chicken 2.???? 3. profit")
+      expect(results[:data][:updateRecipe][:recipe][:instructions]).to be_an(Array)
 
       expect(results[:data][:updateRecipe][:recipe]).to have_key(:ingredients)
       expect(results[:data][:updateRecipe][:recipe][:ingredients]).to be_an(Array)
@@ -76,7 +76,9 @@ RSpec.describe 'Update Recipe' do
               image
               title
               description
-              instructions
+              instructions {
+                description
+              }
               ingredients {
                 name
                 amount

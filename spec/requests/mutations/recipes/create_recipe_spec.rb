@@ -14,7 +14,7 @@ RSpec.describe 'createRecipe endpoint' do
          "title": "Chicken Parmesan",
          "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/7/11/0/FNK_the-best-chicken-parmesan_H_s4x3.jpg.rend.hgtvcom.826.620.suffix/1562853897238.jpeg",
          "description": "A classic favorite!",
-         "instructions": "1. chicken 2.???? 3. profit",
+         "instructions": [{"description": "1. chicken"}, {"description": "2. ???"}, {"description": "3. Profit"}],
          "charityId": "533423",
          "charityName": "Cookies for Kevin Fund",
          "ingredients": [{"name": "Chicken", "amount": "2 lbs"},{"name": "Parmesan", "amount": "5 gallons"}]
@@ -30,7 +30,9 @@ RSpec.describe 'createRecipe endpoint' do
               id
               title
               description
-              instructions
+              instructions {
+                description
+              }
               ingredients {
                 name
                 amount
@@ -60,7 +62,7 @@ RSpec.describe 'createRecipe endpoint' do
       expect(recipe).to have_key(:description)
       expect(recipe[:description]).to be_a(String)
       expect(recipe).to have_key(:instructions)
-      expect(recipe[:instructions]).to be_a(String)
+      expect(recipe[:instructions]).to be_an(Array)
       expect(recipe).to have_key(:ingredients)
       expect(recipe[:ingredients]).to be_an(Array)
       expect(recipe[:ingredients].count).to eq(2)
@@ -72,6 +74,12 @@ RSpec.describe 'createRecipe endpoint' do
         expect(ingredient[:name]).to be_a(String)
         expect(ingredient).to have_key(:amount)
         expect(ingredient[:amount]).to be_a(String)
+      end
+      
+      instructions = recipe[:instructions]
+      instructions.each do |instruction|
+        expect(instruction).to have_key(:description)
+        expect(instruction[:name]).to be_a(String)
       end
     end
   end
