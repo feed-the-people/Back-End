@@ -1,8 +1,9 @@
 class ChargesController < ApplicationController
   def create
     customer = Stripe::Customer.create({
-      email: params[:stripeEmail],
-      source: params[:stripeToken],
+      name: params[:name],
+      email: params[:email],
+      source: params[:charge][:token]
     })
 
     charge = Stripe::Charge.create({
@@ -16,8 +17,8 @@ class ChargesController < ApplicationController
       }
     })
 
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to new_charge_path
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to new_charge_path
   end
 end
