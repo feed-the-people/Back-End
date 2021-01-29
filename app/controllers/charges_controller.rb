@@ -8,7 +8,7 @@ class ChargesController < ApplicationController
 
     charge = Stripe::Charge.create({
       customer: customer.id,
-      amount: params[:amount],
+      amount: params[:amount].delete('.'),
       description: 'NPO Donation',
       currency: 'usd',
       metadata: {
