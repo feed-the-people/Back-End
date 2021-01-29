@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_one_attached :photo
 
   has_many :user_recipes
   has_many :recipes
