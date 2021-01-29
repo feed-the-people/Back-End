@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'pry'
   gem 'shoulda-matchers', '~> 4.0'
+  gem 'cloudinary'
 end
 
 group :development do
