@@ -1,5 +1,7 @@
 class ChargesController < ApplicationController
   def create
+    amount = params[:amount].delete('.')
+
     customer = Stripe::Customer.create({
       name: params[:name],
       email: params[:email],
@@ -8,7 +10,7 @@ class ChargesController < ApplicationController
 
     charge = Stripe::Charge.create({
       customer: customer.id,
-      amount: params[:amount].delete('.'),
+      amount: amount,
       description: 'NPO Donation',
       currency: 'usd',
       metadata: {
