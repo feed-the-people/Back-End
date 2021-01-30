@@ -10,7 +10,6 @@ module Mutations
         blob = AddUserPhoto.upload_file(params[:user_photo])
 
         photo = Photo.create!(
-          user_uploaded: true,
           user_photo: blob
         )
 
