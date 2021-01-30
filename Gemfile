@@ -25,6 +25,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'stripe'
+
 gem 'simplecov', require: false, group: :test
 gem 'bcrypt'
 gem 'factory_bot_rails'
@@ -55,4 +57,3 @@ gem 'graphql', '1.9.18'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
