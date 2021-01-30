@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dygnrpjv8
+  api_key: '598674538385246'
+  api_secret: ii4tn18jQAET4MSVljoNBY2L6p0
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dygnrpjv8
+  api_key: '598674538385246'
+  api_secret: ii4tn18jQAET4MSVljoNBY2L6p0
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dygnrpjv8
+  api_key: '598674538385246'
+  api_secret: ii4tn18jQAET4MSVljoNBY2L6p0
+  enhance_image_tag: true
+  static_file_support: false
