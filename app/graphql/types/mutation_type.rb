@@ -9,6 +9,6 @@ module Types
     field :user_sign_in, mutation: Mutations::Users::UserSignIn
     field :create_recipe, mutation: Mutations::Recipes::CreateRecipe
     field :update_recipe, mutation: Mutations::Recipes::UpdateRecipe
-    field :add_user_photo, mutation: Mutations::Photos::AddUserPhoto
+    # field :add_user_photo, mutation: Mutations::Photos::AddUserPhoto
   end
 end

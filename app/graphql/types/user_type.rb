@@ -14,6 +14,12 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :recipes, [Types::RecipeType], null: false
     field :user_recipes, [Types::UserRecipeType], null: false
-    field :photo, [Types::PhotoType], null: false
+    field :photo, String, null: false
+
+    def photo
+      binding.pry
+      # object.photo.service_url if object.photo.attached?
+      Cloudinary::Utils.cloudinary_url(object.photo.blob.key) if object.photo.attached?
+    end
   end
 end
