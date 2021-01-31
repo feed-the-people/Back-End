@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   end  
   post "/graphql", to: "graphql#execute"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  post '/users/:id/upload_photo', to: 'users#upload_photo'
 end
